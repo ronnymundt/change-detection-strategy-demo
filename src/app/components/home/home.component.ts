@@ -1,7 +1,7 @@
+import {AsyncPipe} from "@angular/common";
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { IAddress } from '../../interfaces';
 import { MatButton } from '@angular/material/button';
+import {AddressDataService} from "../../services";
 import { PersonAddressComponent } from '../person-address/person-address.component';
 
 @Component({
@@ -11,51 +11,18 @@ import { PersonAddressComponent } from '../person-address/person-address.compone
   standalone: true,
   imports: [
     PersonAddressComponent,
-    MatButton
+    MatButton,
+    AsyncPipe
   ],
 })
 export class HomeComponent {
-  // PRIVATES
-  private _addressSubject = new BehaviorSubject<IAddress>(this._getToggledAddress());
+  public address$ = this.addressService.address$;
 
-  // PUBLICS
-  public address$ = this._addressSubject.asObservable();
-
-  /**
-   * Methode toggelt und liefert die Adresse zurück.
-   * @returns
-   */
-  private _getToggledAddress(): IAddress {
-    const name = this._addressSubject?.value.name;
-    if(!name || name === 'Tannen') {
-      return {
-        forename: 'Marty',
-        name: 'McFly',
-        street: '9303 Roslyndale Ave',
-        city: 'Pacoima',
-        state: 'CA',
-        zip: 91331,
-        country: 'USA'
-      }
-    } else {
-      return {
-        forename: 'Biff',
-        name: 'Tannen',
-        street: '1809 Bushnell Ave',
-        city: 'South Pasadena',
-        state: 'CA',
-        zip: 91030,
-        country: 'USA'
-      }
-    }
-  }
+  constructor(private readonly addressService: AddressDataService) { }
 
   // EVENTS
 
-  /**
-   * Klick Event zum ändern der Adresse.
-   */
   onToggleAddressClick(): void {
-    this._addressSubject.next(this._getToggledAddress());
+    this.addressService.toggleAddressAction();
   }
 }

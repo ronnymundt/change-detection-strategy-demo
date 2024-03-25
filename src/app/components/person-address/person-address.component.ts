@@ -20,14 +20,11 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
   ]
 })
 export class PersonAddressComponent implements OnInit {
-  //
   @Input() address$: Observable<IAddress> = new Observable<IAddress>();
-
-  //
   addressForm: FormGroup = new FormGroup({});
 
   constructor(
-    private _fb: FormBuilder
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -35,11 +32,8 @@ export class PersonAddressComponent implements OnInit {
     this._initSubscriber();
   }
 
-  /**
-  * methode initialisiert, die form gruppe
-  */
   private _initFormGroup(): void {
-    this.addressForm = this._fb.group({
+    this.addressForm = this.fb.group({
       forename: [{value: '', disabled: true}],
       name: [{value: '', disabled: true}],
       street: [{value: '', disabled: true}],
@@ -50,9 +44,6 @@ export class PersonAddressComponent implements OnInit {
     });
   }
 
-  /**
-  * Methode initialisiert die Subscriber.
-  */
   private _initSubscriber(): void {
     this.address$.subscribe((values: IAddress) => this.addressForm.patchValue(values));
   }
