@@ -10,7 +10,7 @@ import { IAddress } from '../../interfaces/address.interface';
   changeDetection: ChangeDetectionStrategy.OnPush // Component akzeptiert keine Änderung einzelner Properties vom address$-Objekt.
 })
 export class PersonAddressComponent implements OnInit {
-  // 
+  //
   @Input() address$: Observable<IAddress> = new Observable<IAddress>();
 
   //
@@ -20,13 +20,13 @@ export class PersonAddressComponent implements OnInit {
     private _fb: FormBuilder
   ) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this._initFormGroup();
     this._initSubscriber();
-  } 
-  
+  }
+
   /**
-  * methode initalisiert die form gruppe
+  * methode initialisiert, die form gruppe
   */
   private _initFormGroup(): void {
     this.addressForm = this._fb.group({

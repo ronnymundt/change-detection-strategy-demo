@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "change-detection-strategy-demo:build:production"
+              "buildTarget": "change-detection-strategy-demo:build:production"
             },
             "development": {
-              "browserTarget": "change-detection-strategy-demo:build:development"
+              "buildTarget": "change-detection-strategy-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "change-detection-strategy-demo:build"
+            "buildTarget": "change-detection-strategy-demo:build"
           }
         },
         "test": {
