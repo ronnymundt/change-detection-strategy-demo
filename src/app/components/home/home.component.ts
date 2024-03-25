@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { IAddress } from '../../interfaces/address.interface';
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { IAddress } from '../../interfaces';
+import { MatButton } from '@angular/material/button';
+import { PersonAddressComponent } from '../person-address/person-address.component';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [
+    PersonAddressComponent,
+    MatButton
+  ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   // PRIVATES
-  private _addressSubject = new BehaviorSubject<IAddress>(this._getToggledAddress()); 
+  private _addressSubject = new BehaviorSubject<IAddress>(this._getToggledAddress());
 
   // PUBLICS
   public address$ = this._addressSubject.asObservable();
 
-  constructor() { }
-
-  ngOnInit(): void { }   
-
   /**
    * Methode toggelt und liefert die Adresse zurück.
-   * @returns 
+   * @returns
    */
   private _getToggledAddress(): IAddress {
     const name = this._addressSubject?.value.name;
@@ -44,7 +47,7 @@ export class HomeComponent implements OnInit {
         zip: 91030,
         country: 'USA'
       }
-    }    
+    }
   }
 
   // EVENTS
@@ -52,7 +55,7 @@ export class HomeComponent implements OnInit {
   /**
    * Klick Event zum ändern der Adresse.
    */
-  public onToggleAddressClick(): void {
+  onToggleAddressClick(): void {
     this._addressSubject.next(this._getToggledAddress());
   }
 }
