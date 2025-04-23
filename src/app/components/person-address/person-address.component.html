@@ -1,44 +1,13 @@
 <div [formGroup]="addressForm" class="form-wrapper">
-    <div class="name-grid">
-        <mat-form-field>
-            <mat-label>Vorname</mat-label>
-            <input matInput formControlName="forename">
-        </mat-form-field>
-        
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-        </mat-form-field>
-    </div>    
+  <div class="name-grid">
+    <mat-form-field>
+      <mat-label>Forename</mat-label>
+      <input matInput formControlName="forename" />
+    </mat-form-field>
 
-    <div>
-       <mat-form-field>
-            <mat-label>Stasse</mat-label>
-            <input matInput formControlName="street">
-        </mat-form-field> 
-    </div>
-        
-    <div class="zip-city-state-grid">
-        <mat-form-field>
-            <mat-label>Stadt</mat-label>
-            <input matInput formControlName="city">
-        </mat-form-field>
-    
-        <mat-form-field>
-            <mat-label>Staat</mat-label>
-            <input matInput formControlName="state">
-        </mat-form-field>
-    
-        <mat-form-field>
-            <mat-label>Plz</mat-label>
-            <input matInput formControlName="zip">
-        </mat-form-field>
-    </div>
-    
-    <div>
-        <mat-form-field>
-            <mat-label>Land</mat-label>
-            <input matInput formControlName="country">
-        </mat-form-field>
-    </div>    
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </div>
 </div>

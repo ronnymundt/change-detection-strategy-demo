@@ -1,4 +1,11 @@
-button {
+:host {
     display: block;
-    margin: auto;
+    padding: 1rem;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    margin-bottom: 1rem;
 }

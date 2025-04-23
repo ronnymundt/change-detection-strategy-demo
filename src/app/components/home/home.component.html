@@ -1,5 +1,26 @@
-<person-address [address$]="address$"></person-address>
-<button
-  mat-raised-button
-  color="primary"
-  (click)="onToggleAddressClick()">Toggle Address</button>
+<h1>Change Detection OnPush Strategy Demo</h1>
+
+<person-address [address]="address"></person-address>
+
+<section class="button-group">
+  <button mat-raised-button color="primary" (click)="onChangeReferenceClick()">
+    Bestehendes Objekt ändern (keine neue Referenz)
+  </button>
+
+  <button mat-raised-button color="primary" (click)="onNewReferenceClick()">
+    Neues Objekt zuweisen (neue Referenz)
+  </button>
+</section>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Address-Referenz</mat-card-title>
+    <mat-card-subtitle>
+      Aktuelle Address-Referenz in der Home-Component
+      (Parent)
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <pre>{{ address | json }}</pre>
+  </mat-card-content>
+</mat-card>

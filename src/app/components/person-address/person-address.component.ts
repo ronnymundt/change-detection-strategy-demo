@@ -1,50 +1,52 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { IAddress } from '../../interfaces';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'person-address',
   templateUrl: './person-address.component.html',
   styleUrls: ['./person-address.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush, // Component akzeptiert keine Änderung einzelner Properties vom address$-Objekt.
+  changeDetection: ChangeDetectionStrategy.OnPush, // Component akzeptiert keine Änderung an der Referenz
   standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput
-  ]
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
-export class PersonAddressComponent implements OnInit {
-  @Input() address$: Observable<IAddress> = new Observable<IAddress>();
-  addressForm: FormGroup = new FormGroup({});
-
-  constructor(
-    private fb: FormBuilder
-  ) { }
-
-  ngOnInit(): void {
-    this._initFormGroup();
-    this._initSubscriber();
+export class PersonAddressComponent {
+  @Input() set address(address: IAddress | null) {
+    if (!address) {
+      return;
+    }
+    this.addressForm.patchValue(address);
+  }
+  get address(): IAddress | null {
+    return this.addressForm.value;
   }
 
-  private _initFormGroup(): void {
+  addressForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.initForm();
+  }
+
+  private initForm() {
     this.addressForm = this.fb.group({
-      forename: [{value: '', disabled: true}],
-      name: [{value: '', disabled: true}],
-      street: [{value: '', disabled: true}],
-      zip: [{value: '', disabled: true}],
-      city: [{value: '', disabled: true}],
-      country: [{value: '', disabled: true}],
-      state: [{value: '', disabled: true}],
+      forename: [],
+      name: [],
     });
-  }
-
-  private _initSubscriber(): void {
-    this.address$.subscribe((values: IAddress) => this.addressForm.patchValue(values));
   }
 }
